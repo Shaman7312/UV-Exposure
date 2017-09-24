@@ -5,6 +5,8 @@
  *  Author: Shaman
  */ 
 
+ #define F_CPU 16000000
+#include <util/delay.h>
 
 #ifndef LEDDISP_H_
 #define LEDDISP_H_
@@ -12,7 +14,7 @@
 #define LedA(__SET) if(__SET==0){PORTC&=~(1<<PINC1);}else if (__SET==1){PORTC|=(1<<PINC1);}
 #define LedB(__SET) if(__SET==0){PORTC&=~(1<<PINC5);}else if (__SET==1){PORTC|=(1<<PINC5);}
 #define LedC(__SET) if(__SET==0){PORTD&=~(1<<PIND1);}else if (__SET==1){PORTD|=(1<<PIND1);}
-#define LedD(__SET) if(__SET==0){PORTC&=~(1<<PINC2);}else if (__SET==1){PORTC|=(1<<PINC2);}
+#define LedD(__SET) if(__SET==0){PORTC&=~(1<<PORTC2);}else if (__SET==1){PORTC|=(1<<PORTC2);}
 #define LedE(__SET) if(__SET==0){PORTC&=~(1<<PINC0);}else if (__SET==1){PORTC|=(1<<PINC0);}
 #define LedF(__SET) if(__SET==0){PORTC&=~(1<<PINC3);}else if (__SET==1){PORTC|=(1<<PINC3);}
 #define LedG(__SET) if(__SET==0){PORTD&=~(1<<PIND6);}else if (__SET==1){PORTD|=(1<<PIND6);}
@@ -26,16 +28,16 @@
 
 
 
-static uint8_t NumToLedTable[20] = {0b10000001, 0b11001111, 0b10010010, 0b10000110, 0b11001100, 0b10100100, 0b10100000, 0b10001111, 0b10000000, 0b10000100,    //Цифры без точки.
-									0b11111111}; // Ничего
+
 
 
 void InitLEDDisplay();
 void SetLeds(uint8_t * digits);
-void SetDigit(uint8_t dig, uint8_t num);
+void SetDigit(uint8_t num, uint8_t dig);
 void ToggleDP(uint8_t dig);
 void SetDP(uint8_t dig);
 void ResetDP(uint8_t dig);
+void ResetAllDP();
 
 
 #endif /* LEDDISP_H_ */
